@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brilliantly Dyslexic — Different by Design. Brilliant by Nature.</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans for clean Kidora Webflow typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* STRICT COLOR PALETTE RATIOS */
+      --bg-warm: #F8F8F5;            /* 70% Base: Warm Off-White */
+      --card-white: #FFFFFF;         /* Crisp White Containers */
+      --primary-cobalt: #1239B5;     /* 15% Primary: Deep Cobalt Blue */
+      --secondary-lavender: #EEEAF8; /* 7% Secondary: Soft Lavender */
+      --secondary-mint: #E8F3EE;     /* 5% Secondary: Pale Mint */
+      --accent-orange: #F47721;     /* 3% Accent: Vibrant Orange */
+
+      /* Typography & Neutral Colors */
+      --text-main: #131828;
+      --text-muted: #535C73;
+      --text-light: #838C9E;
+
+      /* Kidora Design Token Metrics */
+      --radius-sm: 16px;
+      --radius-md: 24px;
+      --radius-lg: 36px;
+      --radius-pill: 9999px;
+
+      /* Shadows & Visual Depth */
+      --shadow-subtle: 0 10px 30px rgba(18, 57, 181, 0.05);
+      --shadow-card: 0 16px 36px rgba(18, 57, 181, 0.08);
+      --shadow-hover: 0 24px 48px rgba(18, 57, 181, 0.14);
+      --shadow-orange: 0 12px 28px rgba(244, 119, 33, 0.32);
+
+      --transition-smooth: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-warm);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 90px 0;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      color: var(--primary-cobalt);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+    }
+
+    h1 { font-size: 3.5rem; }
+    h2 { font-size: 2.75rem; }
+    h3 { font-size: 1.5rem; }
+    h4 { font-size: 1.25rem; }
+
+    p {
+      color: var(--text-muted);
+      font-size: 1.125rem;
+      line-height: 1.7;
+    }
+
+    /* Pill Badges */
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background-color: var(--secondary-lavender);
+      color: var(--primary-cobalt);
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: var(--radius-pill);
+      margin-bottom: 20px;
+    }
+
+    .pill-badge-mint {
+      background-color: var(--card-white);
+      color: var(--primary-cobalt);
+    }
+
+    /* Interactive Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 32px;
+      font-weight: 800;
+      font-size: 1.05rem;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      cursor: pointer;
+      border: none;
+      gap: 10px;
+    }
+
+    .btn-orange {
+      background-color: var(--accent-orange);
+      color: #FFFFFF;
+      box-shadow: var(--shadow-orange);
+    }
+
+    .btn-orange:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 36px rgba(244, 119, 33, 0.45);
+    }
+
+    .btn-cobalt {
+      background-color: var(--primary-cobalt);
+      color: #FFFFFF;
+      box-shadow: 0 10px 28px rgba(18, 57, 181, 0.22);
+    }
+
+    .btn-cobalt:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 18px 36px rgba(18, 57, 181, 0.35);
+    }
+
+    .btn-outline {
+      border: 2.5px solid var(--primary-cobalt);
+      color: var(--primary-cobalt);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary-cobalt);
+      color: #FFFFFF;
+      transform: translateY(-3px);
+    }
+
+    .navbar {
+      padding: 24px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(248, 248, 245, 0.88);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card-white);
+      padding: 12px 28px;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-subtle);
+      border: 1px solid rgba(18, 57, 181, 0.05);
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--primary-cobalt);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: var(--transition-smooth);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-cobalt);
+    }
+
+    .hero {
+      padding: 30px 0 70px 0;
+    }
+
+    .hero-card {
+      background-color: var(--card-white);
+      border-radius: var(--radius-lg);
+      padding: 64px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(18, 57, 181, 0.04);
+      position: relative;
+    }
+
+    .hero-content h1 {
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      margin-bottom: 16px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .hero-illustration-box {
+      background: radial-gradient(circle at 50% 50%, #FAF8FF 0%, var(--secondary-lavender) 100%);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 480px;
+      overflow: hidden;
+    }
+
+    /* Keyframes for Floating 3D Elements */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(3deg); }
+    }
+
+    @keyframes floatReverse {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(10px) rotate(-4deg); }
+    }
+
+    @keyframes pulseScale {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .float-item-1 { animation: floatSlow 4s ease-in-out infinite; }
+    .float-item-2 { animation: floatReverse 5s ease-in-out infinite; }
+    .float-item-3 { animation: floatSlow 3.8s ease-in-out infinite 0.5s; }
+
+    .section-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 56px auto;
+    }
+
+    .grid-2x2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .journey-card {
+      background: var(--card-white);
+      border-radius: var(--radius-md);
+      padding: 40px;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition-smooth);
+      border: 1px solid rgba(18, 57, 181, 0.03);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .journey-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--secondary-lavender);
+    }
+
+    .journey-illustration {
+      width: 100%;
+      height: 180px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      position: relative;
+    }
+
+    .journey-card h3 {
+      margin-bottom: 12px;
+    }
+
+    .strengths-section {
+      background-color: var(--secondary-mint);
+      border-radius: var(--radius-lg);
+      padding: 80px 56px;
+      box-shadow: inset 0 2px 10px rgba(18, 57, 181, 0.02);
+    }
+
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin: 48px 0;
+    }
+
+    .strength-card {
+      background: var(--card-white);
+      padding: 36px 24px;
+      border-radius: var(--radius-md);
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--primary-cobalt);
+      text-align: center;
+      box-shadow: var(--shadow-subtle);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      transition: var(--transition-smooth);
+      border: 1px solid rgba(18, 57, 181, 0.03);
+    }
+
+    .strength-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .strength-icon {
+      width: 90px;
+      height: 90px;
+    }
+
+    .stakeholder-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .stakeholder-card {
+      background-color: var(--card-white);
+      border-radius: var(--radius-md);
+      padding: 36px 24px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: var(--transition-smooth);
+      border: 1px solid rgba(18, 57, 181, 0.03);
+    }
+
+    .stakeholder-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .stakeholder-card h4 {
+      margin: 20px 0 10px 0;
+    }
+
+    .pathway-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background-color: var(--secondary-lavender);
+      border-radius: var(--radius-md);
+      padding: 36px;
+      margin: 48px 0;
+      gap: 20px;
+      position: relative;
+    }
+
+    .pathway-step {
+      background: var(--card-white);
+      border-radius: var(--radius-sm);
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      box-shadow: var(--shadow-subtle);
+      transition: var(--transition-smooth);
+    }
+
+    .pathway-step:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .pathway-title {
+      font-weight: 800;
+      color: var(--primary-cobalt);
+      font-size: 1.25rem;
+    }
+
+    .cta-banner {
+      background-color: var(--primary-cobalt);
+      border-radius: var(--radius-lg);
+      padding: 88px 48px;
+      text-align: center;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 24px 50px rgba(18, 57, 181, 0.28);
+    }
+
+    .cta-banner h2 {
+      color: #FFFFFF;
+      font-size: 3.2rem;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-banner p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.3rem;
+      max-width: 640px;
+      margin: 0 auto 40px auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    footer {
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      padding: 40px 0;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-light);
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1024px) {
+      .hero-card { grid-template-columns: 1fr; }
+      .hero-illustration-box { min-height: 400px; }
+      .stakeholder-grid { grid-template-columns: repeat(2, 1fr); }
+      .pathway-container { grid-template-columns: repeat(2, 1fr); }
+      .strengths-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .grid-2x2 { grid-template-columns: 1fr; }
+      .strengths-grid { grid-template-columns: 1fr; }
+      .stakeholder-grid { grid-template-columns: 1fr; }
+      .pathway-container { grid-template-columns: 1fr; }
+      h1 { font-size: 2.6rem; }
+      h2 { font-size: 2.1rem; }
+      .hero-card { padding: 36px 24px; }
+      .strengths-section { padding: 48px 24px; }
+      .cta-banner { padding: 60px 24px; }
+      .cta-banner h2 { font-size: 2.2rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-container">
+        <a href="#" class="logo">
+          <!-- Logo 3D Spark / Clay Icon SVG -->
+          <svg width="36" height="36" viewBox="0 0 50 50" fill="none">
+            <circle cx="25" cy="25" r="22" fill="var(--secondary-lavender)"/>
+            <path d="M25 6L29.5 18.5L42 20.5L32.5 28.5L35.5 41L25 34.5L14.5 41L17.5 28.5L8 20.5L20.5 18.5L25 6Z" fill="url(#logoGrad)"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="8" y1="6" x2="42" y2="41" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#F47721"/>
+                <stop offset="1" stop-color="#1239B5"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          Brilliantly Dyslexic
+        </a>
+        <div class="nav-links">
+          <a href="#parent-journey">Parent Journey</a>
+          <a href="#strengths">Strengths</a>
+          <a href="#ecosystem">Ecosystem</a>
+          <a href="#future">Future</a>
+          <a href="#parent-journey" class="btn btn-cobalt" style="padding: 10px 24px; font-size: 0.9rem;">For Parents</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="hero-content">
+          <span class="pill-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--accent-orange)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Different by design. Brilliant by nature.
+          </span>
+          <h1>Unlocking the true potential in every mind.</h1>
+          <p>
+            Dyslexia is a different way of thinking. Dyslexia can make reading and writing harder — but it doesn't define how a child thinks, learns, creates or succeeds.
+          </p>
+          <p>
+            Brilliantly Dyslexic helps children and families understand dyslexia, recognise strengths and build the confidence to see what's possible.
+          </p>
+          <div class="hero-buttons">
+            <a href="#parent-journey" class="btn btn-orange">Learn about dyslexia &rarr;</a>
+            <a href="#parent-journey" class="btn btn-outline">For parents &rarr;</a>
+          </div>
+        </div>
+
+        <div class="hero-illustration-box">
+          <!-- HIGH-QUALITY 3D CLAYMATION-STYLE KIDS SVG ILLUSTRATION -->
+          <svg width="100%" height="440" viewBox="0 0 400 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <!-- 3D Gradients & Filters for Depth -->
+              <filter id="clayShadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#1239B5" flood-opacity="0.18"/>
+              </filter>
+              <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#F47721" flood-opacity="0.25"/>
+              </filter>
+              <linearGradient id="bookCover" x1="50" y1="300" x2="350" y2="400" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#1239B5"/>
+                <stop offset="1" stop-color="#0B2375"/>
+              </linearGradient>
+              <linearGradient id="bookPages" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="100%" stop-color="#EAE6F5"/>
+              </linearGradient>
+              <linearGradient id="orangeGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#FF9248"/>
+                <stop offset="100%" stop-color="#F47721"/>
+              </linearGradient>
+              <radialGradient id="skin3D" cx="40%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="#FFCFA4"/>
+                <stop offset="70%" stop-color="#E89B6B"/>
+                <stop offset="100%" stop-color="#C27546"/>
+              </radialGradient>
+              <radialGradient id="hair3D" cx="30%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#4A2A18"/>
+                <stop offset="100%" stop-color="#1F0E05"/>
+              </radialGradient>
+              <radialGradient id="shirt3D" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="100%" stop-color="#D1D8F0"/>
+              </radialGradient>
+              <linearGradient id="skirt3D" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1239B5"/>
+                <stop offset="100%" stop-color="#0A1F66"/>
+              </linearGradient>
+            </defs>
+
+            <!-- 1. Giant 3D Open Book Base -->
+            <g filter="url(#clayShadow)">
+              <!-- Book Spine/Base Plastic Rim -->
+              <path d="M40 370 C 130 395, 270 395, 360 370 L 375 390 C 270 420, 130 420, 25 390 Z" fill="url(#bookCover)"/>
+              <!-- Book Spine Center Binding -->
+              <rect x="190" y="350" width="20" height="50" rx="6" fill="var(--accent-orange)"/>
+
+              <!-- Left Page Block -->
+              <path d="M45 360 C 120 340, 185 350, 195 358 L 195 385 C 185 375, 120 365, 45 385 Z" fill="url(#bookPages)"/>
+              <path d="M50 352 C 120 332, 185 342, 195 350 L 195 355 C 185 347, 120 337, 50 357 Z" fill="#FFFFFF"/>
+
+              <!-- Right Page Block -->
+              <path d="M355 360 C 280 340, 215 350, 205 358 L 205 385 C 215 375, 280 365, 355 385 Z" fill="url(#bookPages)"/>
+              <path d="M350 352 C 280 332, 215 342, 205 350 L 205 355 C 215 347, 280 337, 350 357 Z" fill="#FFFFFF"/>
+            </g>
+
+            <!-- 2. Joyful 3D Kid Jumping Out -->
+            <g filter="url(#clayShadow)">
+              <!-- Legs in Jump Motion -->
+              <rect x="160" y="240" width="22" height="60" rx="11" fill="url(#skin3D)" transform="rotate(-20 160 240)"/>
+              <rect x="215" y="240" width="22" height="60" rx="11" fill="url(#skin3D)" transform="rotate(20 215 240)"/>
+
+              <!-- 3D Shoes -->
+              <ellipse cx="138" cy="298" rx="18" ry="12" fill="#FFFFFF"/>
+              <ellipse cx="138" cy="298" rx="18" ry="6" fill="var(--primary-cobalt)"/>
+              <ellipse cx="260" cy="298" rx="18" ry="12" fill="#FFFFFF"/>
+              <ellipse cx="260" cy="298" rx="18" ry="6" fill="var(--primary-cobalt)"/>
+
+              <!-- 3D Skirt/Shorts -->
+              <path d="M150 220 Q200 240 250 220 L265 260 Q200 280 135 260 Z" fill="url(#skirt3D)"/>
+
+              <!-- Torso / White Polo Shirt -->
+              <path d="M155 155 Q200 145 245 155 L255 225 Q200 235 145 225 Z" fill="url(#shirt3D)"/>
+              <!-- Collar -->
+              <path d="M180 152 L200 175 L220 152 Z" fill="#FFFFFF"/>
+
+              <!-- Extended Expressive Arms -->
+              <path d="M155 165 C 120 145, 100 120, 110 100 C 120 85, 135 110, 150 145 Z" fill="url(#skin3D)"/>
+              <path d="M245 165 C 280 145, 300 120, 290 100 C 280 85, 265 110, 250 145 Z" fill="url(#skin3D)"/>
+
+              <!-- Hands -->
+              <circle cx="108" cy="98" r="14" fill="url(#skin3D)"/>
+              <circle cx="292" cy="98" r="14" fill="url(#skin3D)"/>
+
+              <!-- Head -->
+              <circle cx="200" cy="115" r="42" fill="url(#skin3D)"/>
+
+              <!-- Curly 3D Hair Texture (Clay Balls) -->
+              <g fill="url(#hair3D)">
+                <circle cx="200" cy="70" r="20"/>
+                <circle cx="175" cy="75" r="18"/>
+                <circle cx="225" cy="75" r="18"/>
+                <circle cx="155" cy="90" r="18"/>
+                <circle cx="245" cy="90" r="18"/>
+                <circle cx="148" cy="112" r="16"/>
+                <circle cx="252" cy="112" r="16"/>
+                <circle cx="190" cy="62" r="16"/>
+                <circle cx="210" cy="62" r="16"/>
+              </g>
+
+              <!-- Happy Expressive Face -->
+              <!-- Eyes Happy Arcs -->
+              <path d="M180 115 Q188 105 194 115" stroke="#1F0E05" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+              <path d="M206 115 Q212 105 220 115" stroke="#1F0E05" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+              <!-- Cheeks -->
+              <circle cx="174" cy="122" r="7" fill="#FF8383" opacity="0.5"/>
+              <circle cx="226" cy="122" r="7" fill="#FF8383" opacity="0.5"/>
+              <!-- Big Smile -->
+              <path d="M186 128 Q200 144 214 128 Z" fill="#1F0E05"/>
+              <path d="M190 130 Q200 138 210 130" fill="#FF6B6B"/>
+            </g>
+
+            <!-- 3. Floating 3D Stationary & School Objects around Child -->
+
+            <!-- FLOATING ATOM (Top Right) -->
+            <g class="float-item-1" filter="url(#softGlow)">
+              <g transform="translate(290, 160) scale(0.85)">
+                <ellipse cx="40" cy="40" rx="35" ry="12" fill="none" stroke="var(--primary-cobalt)" stroke-width="4.5" transform="rotate(30 40 40)"/>
+                <ellipse cx="40" cy="40" rx="35" ry="12" fill="none" stroke="var(--accent-orange)" stroke-width="4.5" transform="rotate(-30 40 40)"/>
+                <circle cx="40" cy="40" r="11" fill="url(#orangeGrad)"/>
+                <circle cx="12" cy="24" r="5" fill="var(--secondary-mint)"/>
+                <circle cx="68" cy="56" r="5" fill="var(--primary-cobalt)"/>
+              </g>
+            </g>
+
+            <!-- FLOATING PAINT PALETTE (Mid Left) -->
+            <g class="float-item-2" filter="url(#clayShadow)">
+              <g transform="translate(35, 170) rotate(-15) scale(0.9)">
+                <path d="M10 40 C 10 10, 70 10, 80 35 C 90 60, 60 85, 35 80 C 10 75, 10 60, 10 40 Z" fill="#FFFFFF"/>
+                <circle cx="65" cy="62" r="8" fill="#E8F3EE"/> <!-- Thumbhole -->
+                <!-- Color Blobs -->
+                <circle cx="28" cy="32" r="7" fill="#F47721"/>
+                <circle cx="48" cy="26" r="7" fill="#1239B5"/>
+                <circle cx="68" cy="36" r="7" fill="#4CD964"/>
+                <circle cx="30" cy="56" r="7" fill="#FFCC00"/>
+              </g>
+            </g>
+
+            <!-- FLOATING 3D RULER & CRAYON (Top Center Left) -->
+            <g class="float-item-3" filter="url(#softGlow)">
+              <!-- Protractor / Ruler -->
+              <path d="M60 70 A 35 35 0 0 1 130 70 Z" fill="#4CD964" transform="rotate(-20 95 70)" opacity="0.9"/>
+              <path d="M75 70 A 20 20 0 0 1 115 70 Z" fill="#FAF8FF" transform="rotate(-20 95 70)"/>
+
+              <!-- Crayon -->
+              <g transform="translate(130, 30) rotate(35)">
+                <rect x="0" y="0" width="16" height="42" rx="3" fill="#FFCC00"/>
+                <polygon points="0,0 8,-14 16,0" fill="#E6B800"/>
+                <rect x="0" y="10" width="16" height="8" fill="rgba(0,0,0,0.1)"/>
+              </g>
+            </g>
+
+            <!-- FLOATING CLOSED 3D BOOK (Right Bottom) -->
+            <g class="float-item-2" filter="url(#clayShadow)">
+              <g transform="translate(285, 260) rotate(18) scale(0.85)">
+                <rect x="0" y="0" width="60" height="75" rx="8" fill="#3B82F6"/>
+                <rect x="8" y="0" width="52" height="75" rx="4" fill="#60A5FA"/>
+                <rect x="14" y="15" width="28" height="20" rx="4" fill="#FFFFFF"/>
+                <!-- Bookmark -->
+                <path d="M25 75 L25 90 L32 84 L39 90 L39 75 Z" fill="var(--accent-orange)"/>
+              </g>
+            </g>
+
+            <!-- FLOATING SPARKLES & STARS -->
+            <g class="float-item-1">
+              <path d="M220 30 L224 42 L236 44 L227 52 L230 64 L220 58 L210 64 L213 52 L204 44 L216 42 Z" fill="var(--accent-orange)"/>
+              <circle cx="340" cy="110" r="6" fill="var(--primary-cobalt)"/>
+              <circle cx="70" cy="290" r="7" fill="var(--accent-orange)"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="parent-journey">
+    <div class="container">
+      <div class="section-header">
+        <span class="pill-badge">Section 1 — The Parent Journey</span>
+        <h2>A journey, not a label.</h2>
+        <p style="font-weight: 700; color: var(--primary-cobalt); margin-top: 10px;">Clear answers at every step of your child's journey.</p>
+        <p style="margin-top: 12px;">Finding out your child may have dyslexia can bring a lot of questions. We help families move from understanding &rarr; assessment &rarr; support &rarr; strengths &rarr; possibilities.</p>
+      </div>
+
+      <div class="grid-2x2">
+        <!-- Journey Card 1 -->
+        <div class="journey-card">
+          <div class="journey-illustration" style="background-color: var(--secondary-lavender);">
+            <!-- 3D Lightbulb & Open Book SVG -->
+            <svg width="140" height="130" viewBox="0 0 160 140" fill="none">
+              <filter id="iconShadow1" x="-10%" y="-10%" width="120%" height="120%">
+                <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#1239B5" flood-opacity="0.12"/>
+              </filter>
+              <g filter="url(#iconShadow1)">
+                <!-- Open Book -->
+                <path d="M20 90 C 50 80, 75 85, 80 90 L 80 120 C 75 115, 50 110, 20 120 Z" fill="#FFFFFF"/>
+                <path d="M140 90 C 110 80, 85 85, 80 90 L 80 120 C 85 115, 110 110, 140 120 Z" fill="#FFFFFF"/>
+                <path d="M20 90 L140 90" stroke="var(--primary-cobalt)" stroke-width="3"/>
+                <!-- Glowing 3D Idea Bulb -->
+                <circle cx="80" cy="45" r="28" fill="url(#bulbGrad)"/>
+                <path d="M70 68 H90 V76 H70 Z" fill="var(--primary-cobalt)"/>
+                <path d="M74 76 H86 V80 H74 Z" fill="#A0AEC0"/>
+                <!-- Rays -->
+                <line x1="80" y1="8" x2="80" y2="2" stroke="var(--accent-orange)" stroke-width="4" stroke-linecap="round"/>
+                <line x1="42" y1="22" x2="36" y2="18" stroke="var(--accent-orange)" stroke-width="4" stroke-linecap="round"/>
+                <line x1="118" y1="22" x2="124" y2="18" stroke="var(--accent-orange)" stroke-width="4" stroke-linecap="round"/>
+              </g>
+              <defs>
+                <radialGradient id="bulbGrad" cx="35%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#FFD23F"/>
+                  <stop offset="100%" stop-color="#F47721"/>
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+          <h3>What is dyslexia?</h3>
+          <p>Dyslexia is a difference in how the brain processes language. It can affect reading, spelling and writing, while many children also have strong abilities in areas such as creativity, problem-solving and visual thinking.</p>
+        </div>
+
+        <!-- Journey Card 2 -->
+        <div class="journey-card">
+          <div class="journey-illustration" style="background-color: var(--secondary-mint);">
+            <!-- 3D Compass & Telescope SVG -->
+            <svg width="140" height="130" viewBox="0 0 160 140" fill="none">
+              <g filter="url(#iconShadow1)">
+                <circle cx="80" cy="70" r="48" fill="#FFFFFF"/>
+                <circle cx="80" cy="70" r="40" fill="var(--secondary-mint)"/>
+                <!-- Telescope / Compass Needle -->
+                <path d="M80 32 L92 70 L80 62 L68 70 Z" fill="var(--accent-orange)"/>
+                <path d="M80 108 L92 70 L80 78 L68 70 Z" fill="var(--primary-cobalt)"/>
+                <circle cx="80" cy="70" r="7" fill="#FFFFFF"/>
+                <!-- Floating Stars -->
+                <path d="M125 25 L128 33 L136 35 L130 40 L132 48 L125 44 L118 48 L120 40 L114 35 L122 33 Z" fill="var(--accent-orange)"/>
+              </g>
+            </svg>
+          </div>
+          <h3>Could my child be experiencing it?</h3>
+          <p>Every child is different. Some may struggle with reading or spelling, while others may find organisation, memory or processing information more difficult.</p>
+        </div>
+
+        <!-- Journey Card 3 -->
+        <div class="journey-card">
+          <div class="journey-illustration" style="background-color: var(--secondary-mint);">
+            <!-- 3D Assessment Clipboard & Ribbon SVG -->
+            <svg width="140" height="130" viewBox="0 0 160 140" fill="none">
+              <g filter="url(#iconShadow1)">
+                <!-- Clipboard Base -->
+                <rect x="42" y="20" width="76" height="96" rx="12" fill="#FFFFFF"/>
+                <rect x="48" y="26" width="64" height="84" rx="8" fill="var(--secondary-lavender)"/>
+                <!-- Clip -->
+                <rect x="60" y="14" width="40" height="14" rx="4" fill="var(--primary-cobalt)"/>
+                <circle cx="80" cy="21" r="3" fill="#FFFFFF"/>
+                <!-- Check lines -->
+                <rect x="58" y="44" width="30" height="6" rx="3" fill="var(--primary-cobalt)"/>
+                <rect x="58" y="60" width="44" height="6" rx="3" fill="var(--primary-cobalt)"/>
+                <rect x="58" y="76" width="22" height="6" rx="3" fill="var(--primary-cobalt)"/>
+                <!-- 3D Badge Checkmark -->
+                <circle cx="102" cy="86" r="16" fill="var(--accent-orange)"/>
+                <path d="M94 86 L100 92 L110 80" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+          </div>
+          <h3>What does assessment involve?</h3>
+          <p>An assessment looks at how your child learns, where they may need support and where their strengths lie — helping you understand what they need to thrive.</p>
+        </div>
+
+        <!-- Journey Card 4 -->
+        <div class="journey-card">
+          <div class="journey-illustration" style="background-color: var(--secondary-lavender);">
+            <!-- 3D Support Hands & Sprouting Plant SVG -->
+            <svg width="140" height="130" viewBox="0 0 160 140" fill="none">
+              <g filter="url(#iconShadow1)">
+                <!-- Clay Pot -->
+                <path d="M60 90 L100 90 L105 120 L55 120 Z" fill="var(--primary-cobalt)"/>
+                <!-- Sprouting Plant -->
+                <path d="M80 90 V50" stroke="var(--accent-orange)" stroke-width="6" stroke-linecap="round"/>
+                <!-- Leaves -->
+                <path d="M80 65 C60 50, 45 60, 50 40 C65 40, 75 55, 80 65 Z" fill="#4CD964"/>
+                <path d="M80 55 C100 40, 115 50, 110 30 C95 30, 85 45, 80 55 Z" fill="#34C759"/>
+                <!-- Sun / Heart Spark -->
+                <circle cx="80" cy="24" r="10" fill="var(--accent-orange)"/>
+              </g>
+            </svg>
+          </div>
+          <h3>What support is available?</h3>
+          <p>From classroom strategies and assistive technology to specialist support, the right tools can make learning more accessible and help children feel more confident.</p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 52px;">
+        <a href="#" class="btn btn-cobalt">Explore the parent guide &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="strengths">
+    <div class="container">
+      <div class="strengths-section">
+        <div class="section-header" style="margin-bottom: 36px;">
+          <span class="pill-badge pill-badge-mint">Section 2 — Beyond The Challenges</span>
+          <h2>See the whole child.</h2>
+          <p style="font-size: 1.25rem; font-weight: 800; color: var(--primary-cobalt); margin-top: 12px;">What are my child's strengths and interests?</p>
+          <p style="margin-top: 8px;">Dyslexia is only one part of who a child is. Their interests, personality, talents and ways of thinking matter just as much.</p>
+        </div>
+
+        <div class="strengths-grid">
+          <!-- 1. Creativity -->
+          <div class="strength-card">
+            <svg class="strength-icon" viewBox="0 0 90 90" fill="none">
+              <circle cx="45" cy="45" r="40" fill="var(--secondary-lavender)"/>
+              <path d="M28 62 L40 28 L62 40 L50 74 Z" fill="url(#orangeGrad)"/>
+              <path d="M28 62 L22 68 L34 65 Z" fill="var(--primary-cobalt)"/>
+            </svg>
+            Creativity
+          </div>
+
+          <!-- 2. Curiosity -->
+          <div class="strength-card">
+            <svg class="strength-icon" viewBox="0 0 90 90" fill="none">
+              <circle cx="45" cy="45" r="40" fill="var(--secondary-mint)"/>
+              <circle cx="40" cy="40" r="18" stroke="var(--primary-cobalt)" stroke-width="6"/>
+              <line x1="53" y1="53" x2="70" y2="70" stroke="var(--accent-orange)" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+            Curiosity
+          </div>
+
+          <!-- 3. Problem-solving -->
+          <div class="strength-card">
+            <svg class="strength-icon" viewBox="0 0 90 90" fill="none">
+              <circle cx="45" cy="45" r="40" fill="var(--secondary-lavender)"/>
+              <rect x="26" y="26" width="16" height="16" rx="5" fill="var(--primary-cobalt)"/>
+              <rect x="48" y="26" width="16" height="16" rx="5" fill="var(--accent-orange)"/>
+              <rect x="26" y="48" width="16" height="16" rx="5" fill="var(--accent-orange)"/>
+              <rect x="48" y="48" width="16" height="16" rx="5" fill="var(--primary-cobalt)"/>
+            </svg>
+            Problem-solving
+          </div>
+
+          <!-- 4. Visual thinking -->
+          <div class="strength-card">
+            <svg class="strength-icon" viewBox="0 0 90 90" fill="none">
+              <circle cx="45" cy="45" r="40" fill="var(--secondary-mint)"/>
+              <polygon points="45,20 70,35 70,63 45,78 20,63 20,35" fill="none" stroke="var(--primary-cobalt)" stroke-width="5"/>
+              <circle cx="45" cy="49" r="9" fill="var(--accent-orange)"/>
+            </svg>
+            Visual thinking
+          </div>
+
+          <!-- 5. Entrepreneurship -->
+          <div class="strength-card">
+            <svg class="strength-icon" viewBox="0 0 90 90" fill="none">
+              <circle cx="45" cy="45" r="40" fill="var(--secondary-lavender)"/>
+              <path d="M24 62 L38 45 L50 54 L66 28" stroke="var(--primary-cobalt)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M56 28 H66 V38" stroke="var(--accent-orange)" stroke-width="6" stroke-linecap="round"/>
+            </svg>
+            Entrepreneurship
+          </div>
+
+          <!-- 6. Empathy -->
+          <div class="strength-card">
+            <svg class="strength-icon" viewBox="0 0 90 90" fill="none">
+              <circle cx="45" cy="45" r="40" fill="var(--secondary-mint)"/>
+              <path d="M45 66 C45 66 22 48 22 34 C22 25 30 20 37 24 C45 30 45 30 45 30 C45 30 45 30 53 24 C60 20 68 25 68 34 C68 48 45 66 45 66 Z" fill="var(--accent-orange)"/>
+            </svg>
+            Empathy
+          </div>
+        </div>
+
+        <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+          <p style="font-weight: 800; font-size: 1.2rem; color: var(--primary-cobalt); margin-bottom: 12px;">We want children to understand what they can do, not only what they find difficult.</p>
+          <p style="margin-bottom: 32px;"><strong>And what can they pursue?</strong> With the right support and opportunities, dyslexic individuals can build fulfilling futures across education, skills, entrepreneurship and employment.</p>
+          <a href="#" class="btn btn-orange">Discover strengths & possibilities &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ecosystem">
+    <div class="container">
+      <div class="section-header">
+        <span class="pill-badge">Section 3 — Changing The World Around Them</span>
+        <h2>It takes all of us.</h2>
+        <p style="margin-top: 12px;">Building confidence starts with understanding. Children thrive when the people around them understand how they learn — at home, in school and eventually in the workplace.</p>
+      </div>
+
+      <div class="stakeholder-grid">
+        <!-- Families -->
+        <div class="stakeholder-card">
+          <svg width="110" height="95" viewBox="0 0 120 100" fill="none">
+            <path d="M20 85 V45 L60 15 L100 45 V85 Z" fill="var(--secondary-lavender)"/>
+            <rect x="48" y="55" width="24" height="30" rx="4" fill="var(--primary-cobalt)"/>
+            <circle cx="60" cy="35" r="9" fill="var(--accent-orange)"/>
+          </svg>
+          <h4>Families</h4>
+          <p>Practical guidance that helps parents support their children.</p>
+        </div>
+
+        <!-- Schools & Educators -->
+        <div class="stakeholder-card">
+          <svg width="110" height="95" viewBox="0 0 120 100" fill="none">
+            <path d="M60 15 L100 35 L60 55 L20 35 Z" fill="var(--primary-cobalt)"/>
+            <path d="M35 45 V70 C35 82 85 82 85 70 V45" stroke="var(--accent-orange)" stroke-width="5"/>
+          </svg>
+          <h4>Schools & Educators</h4>
+          <p>Better understanding and more inclusive learning environments.</p>
+        </div>
+
+        <!-- Corporates -->
+        <div class="stakeholder-card">
+          <svg width="110" height="95" viewBox="0 0 120 100" fill="none">
+            <rect x="25" y="32" width="70" height="53" rx="8" fill="var(--secondary-mint)" stroke="var(--primary-cobalt)" stroke-width="3.5"/>
+            <path d="M45 32 V22 C45 16 75 16 75 22 V32" stroke="var(--accent-orange)" stroke-width="4.5"/>
+          </svg>
+          <h4>Corporates</h4>
+          <p>Awareness and inclusion that extends into skills, careers and employment.</p>
+        </div>
+
+        <!-- Government & Policy -->
+        <div class="stakeholder-card">
+          <svg width="110" height="95" viewBox="0 0 120 100" fill="none">
+            <path d="M60 15 L100 30 V55 C100 75 60 90 60 90 C60 90 20 75 20 55 V30 Z" fill="var(--secondary-lavender)" stroke="var(--primary-cobalt)" stroke-width="3.5"/>
+            <path d="M50 50 L58 58 L72 42" stroke="var(--accent-orange)" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+          <h4>Government & Policy</h4>
+          <p>Advocacy for systems that recognise and support different ways of learning.</p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 52px;">
+        <a href="#" class="btn btn-outline">Work with us &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="future">
+    <div class="container">
+      <div class="section-header">
+        <span class="pill-badge">Section 4 — The Future</span>
+        <h2>Different minds. Brighter futures.</h2>
+        <p style="font-weight: 800; color: var(--primary-cobalt); margin-top: 12px;">What could their future look like?</p>
+        <p style="margin-top: 8px;">A diagnosis shouldn't narrow a child's future. It should help them understand how they learn — and give them the tools and support to make the most of their strengths.</p>
+      </div>
+
+      <!-- Pathway Ribbon / Timeline -->
+      <div class="pathway-container">
+        <!-- Step 1 -->
+        <div class="pathway-step">
+          <svg width="64" height="64" viewBox="0 0 60 60" fill="none">
+            <rect x="8" y="8" width="44" height="44" rx="10" fill="var(--secondary-mint)"/>
+            <path d="M18 22 H42 M18 30 H36 M18 38 H28" stroke="var(--primary-cobalt)" stroke-width="3.5" stroke-linecap="round"/>
+          </svg>
+          <span class="pathway-title">Education</span>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="pathway-step">
+          <svg width="64" height="64" viewBox="0 0 60 60" fill="none">
+            <rect x="8" y="8" width="44" height="44" rx="10" fill="var(--secondary-lavender)"/>
+            <path d="M30 18 L33 26 L42 27 L35 33 L37 42 L30 37 L23 42 L25 33 L18 27 L27 26 Z" fill="var(--accent-orange)"/>
+          </svg>
+          <span class="pathway-title">Skills</span>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="pathway-step">
+          <svg width="64" height="64" viewBox="0 0 60 60" fill="none">
+            <rect x="8" y="8" width="44" height="44" rx="10" fill="var(--secondary-mint)"/>
+            <path d="M30 18 C38 26, 38 38, 35 44 H25 C22 38, 22 26, 30 18 Z" fill="var(--primary-cobalt)"/>
+            <path d="M20 38 L12 45 H22" stroke="var(--accent-orange)" stroke-width="3.5"/>
+            <path d="M40 38 L48 45 H38" stroke="var(--accent-orange)" stroke-width="3.5"/>
+          </svg>
+          <span class="pathway-title">Careers</span>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="pathway-step">
+          <svg width="64" height="64" viewBox="0 0 60 60" fill="none">
+            <rect x="8" y="8" width="44" height="44" rx="10" fill="var(--secondary-lavender)"/>
+            <path d="M20 48 V16 M20 18 L42 26 L20 34" stroke="var(--accent-orange)" stroke-width="4.5" stroke-linecap="round"/>
+          </svg>
+          <span class="pathway-title">Independence</span>
+        </div>
+      </div>
+
+      <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+        <p style="margin-bottom: 32px; font-size: 1.15rem;">We're working towards a world where dyslexic children aren't defined by what they struggle with, but supported to discover what they're capable of.</p>
+        <a href="#" class="btn btn-cobalt">See what's possible &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container" style="margin-bottom: 90px;">
+    <div class="cta-banner">
+      <h2>Every child deserves to see what's possible.</h2>
+      <p>Join us in reshaping the journey for dyslexic children and their families.</p>
+      <a href="#" class="btn btn-orange">Get Started Today &rarr;</a>
+
+      <!-- Background Playful Vector Spark Overlay -->
+      <svg style="position: absolute; right: -30px; top: -30px; opacity: 0.15;" width="280" height="280" viewBox="0 0 200 200" fill="none">
+        <circle cx="100" cy="100" r="80" stroke="#FFFFFF" stroke-width="12"/>
+        <path d="M100 20 L110 50 L140 60 L110 70 L100 100 L90 70 L60 60 L90 50 Z" fill="#FFFFFF"/>
+      </svg>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; Brilliantly Dyslexic. All rights reserved. Designed in Kidora Webflow Style.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
