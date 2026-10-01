@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Screening Tool | Brilliantly Dyslexic</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1D267D',         // Deep vibrant blue
+                            blueLight: '#E8F0FE',    // Soft light blue
+                            lavender: '#F0F2FD',     // Organic light purple
+                            orange: '#FF7D54',       // Warm coral orange
+                            orangeLight: '#FFF0EC',   // Pastel orange
+                            teal: '#20B2AA',         // Friendly teal accent
+                            tealLight: '#E6F8F6',
+                            dark: '#0F172A',
+                            slate: '#475569'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        heading: ['"Outfit"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F8FAFC;
+            color: #1E293B;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        h1, h2, h3, .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Blob accent shapes */
+        .blob-bg-1 {
+            border-radius: 62% 38% 70% 30% / 30% 68% 32% 70%;
+        }
+        .blob-bg-2 {
+            border-radius: 30% 70% 40% 60% / 60% 30% 70% 40%;
+        }
+
+        /* Custom printing styles */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background: white !important;
+                padding: 0 !important;
+            }
+            .print-card {
+                box-shadow: none !important;
+                border: 1px solid #CBD5E1 !important;
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between text-slate-800 antialiased selection:bg-brand-blueLight selection:text-brand-blue">
+
+    <div>
+        <!-- Navigation Bar -->
+        <header class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100 no-print shadow-sm">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                <!-- Brand Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="relative flex items-center justify-center w-11 h-11 rounded-2xl bg-brand-blueLight text-brand-blue font-extrabold text-2xl font-heading shadow-inner">
+                        <span>b</span>
+                        <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-brand-orange"></span>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="text-2xl sm:text-3xl font-extrabold tracking-tight text-brand-blue font-heading block leading-none">
+                            brilliantly<span class="text-brand-orange">.</span>
+                        </span>
+                        <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 block mt-0.5">dyslexic</span>
+                    </div>
+                </div>
+
+                <!-- Top Navigation & Action Controls -->
+                <div class="flex items-center gap-3">
+                    <button onclick="resetAllSelections()" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all flex items-center gap-2">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                        <span class="hidden sm:inline">Reset Form</span>
+                    </button>
+                    <button onclick="window.print()" class="px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-brand-blue hover:bg-slate-900 shadow-lg shadow-brand-blue/20 hover:shadow-brand-blue/30 transition-all flex items-center gap-2 transform active:scale-95">
+                        <i data-lucide="printer" class="w-4 h-4"></i>
+                        <span>Print / Save PDF</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+
+            <!-- Hero Header Section -->
+            <div class="relative bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-slate-100 overflow-hidden print-card">
+                <!-- Background Graphic Blobs -->
+                <div class="absolute -top-12 -right-12 w-56 h-56 bg-brand-lavender/70 blob-bg-1 pointer-events-none no-print"></div>
+                <div class="absolute -bottom-10 -left-10 w-44 h-44 bg-brand-orangeLight/80 blob-bg-2 pointer-events-none no-print"></div>
+
+                <div class="relative z-10 max-w-3xl">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-blueLight text-brand-blue font-bold text-xs uppercase tracking-wider mb-4">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-orange"></i>
+                        Teacher Assessment Tool
+                    </div>
+                    
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-2 font-heading">
+                        Attention Teachers
+                    </h1>
+                    
+                    <p class="text-xl sm:text-2xl font-bold text-brand-blue mb-6 font-heading">
+                        Does the child show any of the difficulties?
+                    </p>
+
+                    <!-- Instructions and Disclaimer Notice -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 sm:p-5 rounded-2xl bg-brand-orangeLight/70 border border-brand-orange/20 text-slate-800 flex items-start gap-3.5">
+                            <div class="p-2 bg-brand-orange text-white rounded-xl shrink-0 mt-0.5 shadow-sm">
+                                <i data-lucide="alert-circle" class="w-5 h-5"></i>
+                            </div>
+                            <div class="text-xs sm:text-sm leading-relaxed">
+                                <span class="font-bold text-slate-900 block mb-0.5 uppercase tracking-wide">Disclaimer</span>
+                                This is <strong>not a diagnostic tool</strong>. It is designed to help teachers observe and record potential learning difficulties early.
+                            </div>
+                        </div>
+
+                        <div class="p-4 sm:p-5 rounded-2xl bg-brand-blueLight/60 border border-brand-blue/20 text-slate-800 flex items-start gap-3.5">
+                            <div class="p-2 bg-brand-blue text-white rounded-xl shrink-0 mt-0.5 shadow-sm">
+                                <i data-lucide="check-check" class="w-5 h-5"></i>
+                            </div>
+                            <div class="text-xs sm:text-sm leading-relaxed">
+                                <span class="font-bold text-slate-900 block mb-0.5 uppercase tracking-wide">Instruction</span>
+                                Select <strong>"YES"</strong> if you observe the symptom or difficulty <em>often</em> in class or daily tasks. Otherwise, select <strong>"NO"</strong>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screening Details Form -->
+            <section class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100 print-card">
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                    <div class="w-9 h-9 rounded-2xl bg-brand-blueLight text-brand-blue flex items-center justify-center font-extrabold text-base font-heading">
+                        1
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-extrabold text-slate-900 font-heading">Screening Details</h2>
+                        <p class="text-xs sm:text-sm text-slate-500 font-medium">Enter student and educator background information</p>
+                    </div>
+                </div>
+
+                <form id="screeningDetailsForm" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div class="lg:col-span-2">
+                        <label for="childName" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
+                            Name of Child <span class="text-brand-orange">*</span>
+                        </label>
+                        <input type="text" id="childName" placeholder="Enter full name of student" 
+                            class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:border-brand-blue focus:ring-4 focus:ring-brand-blueLight/60 outline-none transition-all text-base font-semibold text-slate-800 placeholder:font-normal placeholder:text-slate-400 bg-slate-50/50 focus:bg-white">
+                    </div>
+
+                    <div>
+                        <label for="childAgeClass" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
+                            Age / Class <span class="text-brand-orange">*</span>
+                        </label>
+                        <input type="text" id="childAgeClass" placeholder="e.g. 8 Years / Grade 3" 
+                            class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:border-brand-blue focus:ring-4 focus:ring-brand-blueLight/60 outline-none transition-all text-base font-semibold text-slate-800 placeholder:font-normal placeholder:text-slate-400 bg-slate-50/50 focus:bg-white">
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <label for="schoolName" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
+                            School Name <span class="text-brand-orange">*</span>
+                        </label>
+                        <input type="text" id="schoolName" placeholder="Enter school name" 
+                            class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:border-brand-blue focus:ring-4 focus:ring-brand-blueLight/60 outline-none transition-all text-base font-semibold text-slate-800 placeholder:font-normal placeholder:text-slate-400 bg-slate-50/50 focus:bg-white">
+                    </div>
+
+                    <div>
+                        <label for="screeningDate" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
+                            Date of Screening <span class="text-brand-orange">*</span>
+                        </label>
+                        <input type="date" id="screeningDate" 
+                            class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:border-brand-blue focus:ring-4 focus:ring-brand-blueLight/60 outline-none transition-all text-base font-semibold text-slate-800 bg-slate-50/50 focus:bg-white">
+                    </div>
+
+                    <div class="lg:col-span-3">
+                        <label for="educatorName" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
+                            Name of Educator / Evaluator <span class="text-brand-orange">*</span>
+                        </label>
+                        <input type="text" id="educatorName" placeholder="Enter teacher or evaluator's name" 
+                            class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:border-brand-blue focus:ring-4 focus:ring-brand-blueLight/60 outline-none transition-all text-base font-semibold text-slate-800 placeholder:font-normal placeholder:text-slate-400 bg-slate-50/50 focus:bg-white">
+                    </div>
+                </form>
+            </section>
+
+            <!-- Explicit YES / NO Symptoms Checklist -->
+            <section class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100 print-card">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-2xl bg-brand-blueLight text-brand-blue flex items-center justify-center font-extrabold text-base font-heading">
+                            2
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-extrabold text-slate-900 font-heading">Symptom Checklist</h2>
+                            <p class="text-xs sm:text-sm text-slate-500 font-medium">Check YES or NO for each difficulty seen often in class</p>
+                        </div>
+                    </div>
+
+                    <!-- Progress Indicator & Quick Controls -->
+                    <div class="flex items-center gap-3 no-print">
+                        <span id="completionTracker" class="text-xs font-bold px-3 py-1.5 rounded-xl bg-slate-100 text-slate-600">
+                            Answered 0 / 22
+                        </span>
+                        <button type="button" onclick="setAllResponses('no')" class="text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-xl transition-all">
+                            Mark All NO
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Column Titles Header (Desktop) -->
+                <div class="hidden md:grid grid-cols-12 gap-4 px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 mb-2">
+                    <div class="col-span-1 text-center">#</div>
+                    <div class="col-span-7">Difficulty / Symptom</div>
+                    <div class="col-span-4 text-center">Observed Often?</div>
+                </div>
+
+                <!-- 22 Items Container -->
+                <div id="symptomsListContainer" class="space-y-3">
+                    <!-- Dynamic rendering via JavaScript -->
+                </div>
+            </section>
+
+            <!-- Real-time Scoring & Evaluation Card -->
+            <section id="resultsSection" class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden transition-all duration-300 print-card">
+                <div class="absolute top-0 right-0 w-96 h-96 bg-brand-blue/30 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="relative z-10 space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-2xl bg-brand-orange/20 text-brand-orange flex items-center justify-center font-extrabold text-base font-heading">
+                                3
+                            </div>
+                            <h2 class="text-2xl font-extrabold text-white font-heading">Assessment Score & Outcome</h2>
+                        </div>
+                        <span id="scoreBadge" class="text-xs font-extrabold uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-slate-800 text-slate-300">
+                            0% Evaluated
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                        <!-- Score Display -->
+                        <div class="md:col-span-5 bg-slate-800/90 rounded-2xl p-6 border border-slate-700/60 text-center flex flex-col items-center justify-center">
+                            <span class="text-xs font-extrabold text-slate-400 uppercase tracking-widest mb-1">Score (Number of YES Ticks)</span>
+                            <div class="flex items-baseline justify-center gap-1 my-1">
+                                <span id="yesScoreDisplay" class="text-5xl sm:text-6xl font-black text-white font-heading">0</span>
+                                <span class="text-2xl text-slate-400 font-extrabold font-heading">/ 22</span>
+                            </div>
+
+                            <!-- Progress Bar -->
+                            <div class="w-full bg-slate-700/80 h-3.5 rounded-full overflow-hidden mt-3 p-0.5 border border-slate-600/40">
+                                <div id="progressBar" class="bg-brand-blue h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between w-full text-[11px] font-bold text-slate-400 mt-2 px-1">
+                                <span>0 Ticks</span>
+                                <span id="thresholdIndicator" class="text-brand-orange font-extrabold">60% Threshold (13)</span>
+                                <span>22 Ticks</span>
+                            </div>
+                        </div>
+
+                        <!-- Results Recommendation -->
+                        <div class="md:col-span-7 flex flex-col justify-between h-full space-y-4">
+                            <div>
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-slate-400 block mb-2">
+                                    Remedial Intervention Status
+                                </span>
+                                
+                                <div id="interventionBadge" class="inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl font-extrabold text-lg sm:text-xl transition-all bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-heading">
+                                    <i data-lucide="check-circle-2" id="statusIcon" class="w-6 h-6"></i>
+                                    <span id="statusText">Remedial Intervention Needed: NO</span>
+                                </div>
+                            </div>
+
+                            <p id="recommendationDescription" class="text-sm text-slate-300 leading-relaxed bg-slate-800/60 p-4 rounded-2xl border border-slate-700/50">
+                                Currently <strong>0 out of 22 (0%)</strong> difficulties are ticked as YES. Count is below the 60% threshold (13 or more YES ticks). Continue supporting the student's learning in standard classroom settings.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Criteria Rule Box -->
+                    <div class="text-xs text-slate-400 border-t border-slate-800/80 pt-4 flex items-start sm:items-center gap-2.5">
+                        <i data-lucide="info" class="w-4 h-4 shrink-0 text-brand-orange mt-0.5 sm:mt-0"></i>
+                        <span><strong>Scoring Criteria:</strong> Count the number of YES responses. If the child shows <strong>60% or more symptoms</strong> (more than 13 out of 22), remedial intervention is recommended.</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-100 mt-16 py-8 no-print">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-xl bg-brand-blueLight text-brand-blue font-black flex items-center justify-center font-heading text-sm">
+                    b
+                </div>
+                <div>
+                    <span class="font-extrabold text-slate-900 tracking-tight font-heading">brilliantly dyslexic</span>
+                    <p class="text-xs text-slate-500">Supporting diverse learners and early educator insights.</p>
+                </div>
+            </div>
+
+            <div class="text-xs font-medium text-slate-400 text-center sm:text-right">
+                &copy; <span id="yearSpan"></span> Brilliantly Dyslexic. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Exact 22 Checklist Items
+        const symptoms = [
+            "Difficulty in recognizing and identifying letters of the alphabet.",
+            "Difficulty in associating sound to the letters.",
+            "Difficulty in joining sounds to make words.",
+            "Difficulty in writing letters, words and numbers within the required lines.",
+            "Difficulty in doing mathematical operations (addition, subtraction, multiplication, division).",
+            "The child continues counting on fingers (class 3 onwards).",
+            "Difficulty in comprehension (reading more than listening).",
+            "Difficulty in writing (including copying).",
+            "The child shows letter reversals i.e. b for d or w for m, was for saw, 203 for 320 etc.",
+            "Difficulty in taking care of their belongings like pencils, books etc.",
+            "Difficulty of attention span and concentration.",
+            "Day dreaming in class.",
+            "Difficulty in expressing while writing but is bright verbally.",
+            "Difficulty in sitting in one place for long and is always moving about.",
+            "Difficulty in speech and / or language.",
+            "Difficulty with appropriate behaviour in the class and at home.",
+            "Difficulty in communicating or socialising with others.",
+            "Difficulty in remembering things.",
+            "Difficulty in doing everyday tasks like finishing homework, following teacher's instructions/directions or using the washroom without help.",
+            "Difficulty expressing emotions and needs appropriately.",
+            "Difficulty in having proper eye contact.",
+            "The child has repetitive gestures like spinning on a certain spot, flapping hands, rocking, humming to self."
+        ];
+
+        // State object to store answers: key = index, value = 'yes' | 'no' | null
+        const responses = {};
+
+        // Initialize empty responses
+        symptoms.forEach((_, i) => responses[i] = null);
+
+        // Render checklist UI with explicit YES and NO choice buttons
+        function renderSymptomsList() {
+            const container = document.getElementById('symptomsListContainer');
+            container.innerHTML = '';
+
+            symptoms.forEach((symptomText, index) => {
+                const itemNum = index + 1;
+                const currentVal = responses[index]; // 'yes', 'no', or null
+
+                const itemRow = document.createElement('div');
+                itemRow.className = `p-4 sm:p-4 rounded-2xl border transition-all duration-200 grid grid-cols-1 md:grid-cols-12 gap-4 items-center ${
+                    currentVal === 'yes' 
+                        ? 'bg-brand-orangeLight/40 border-brand-orange/40 shadow-sm' 
+                        : currentVal === 'no'
+                        ? 'bg-slate-50/80 border-slate-200/80'
+                        : 'bg-white border-slate-200/90 hover:border-slate-300'
+                }`;
+
+                itemRow.innerHTML = `
+                    <!-- Number Badge & Symptom Text -->
+                    <div class="md:col-span-8 flex items-start gap-3">
+                        <span class="w-7 h-7 rounded-lg bg-slate-100 text-slate-600 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5 font-heading">
+                            ${itemNum}
+                        </span>
+                        <div class="text-base sm:text-lg font-medium text-slate-800 leading-snug">
+                            ${symptomText}
+                        </div>
+                    </div>
+
+                    <!-- Explicit YES / NO Button Selector -->
+                    <div class="md:col-span-4 flex items-center justify-end gap-2 sm:gap-3 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-slate-100">
+                        <!-- YES Button -->
+                        <button 
+                            type="button"
+                            onclick="setAnswer(${index}, 'yes')"
+                            class="flex-1 md:flex-none px-5 py-2.5 rounded-xl font-extrabold text-sm transition-all flex items-center justify-center gap-2 transform active:scale-95 ${
+                                currentVal === 'yes'
+                                    ? 'bg-brand-orange text-white shadow-md shadow-brand-orange/20 ring-2 ring-brand-orange ring-offset-1'
+                                    : 'bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200'
+                            }"
+                        >
+                            <i data-lucide="${currentVal === 'yes' ? 'check-circle-2' : 'circle'}" class="w-4 h-4"></i>
+                            <span>YES</span>
+                        </button>
+
+                        <!-- NO Button -->
+                        <button 
+                            type="button"
+                            onclick="setAnswer(${index}, 'no')"
+                            class="flex-1 md:flex-none px-5 py-2.5 rounded-xl font-extrabold text-sm transition-all flex items-center justify-center gap-2 transform active:scale-95 ${
+                                currentVal === 'no'
+                                    ? 'bg-slate-800 text-white shadow-md ring-2 ring-slate-800 ring-offset-1'
+                                    : 'bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200'
+                            }"
+                        >
+                            <i data-lucide="${currentVal === 'no' ? 'x-circle' : 'circle'}" class="w-4 h-4"></i>
+                            <span>NO</span>
+                        </button>
+                    </div>
+                `;
+
+                container.appendChild(itemRow);
+            });
+
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+
+            updateCalculations();
+        }
+
+        // Set response for a specific item
+        function setAnswer(index, val) {
+            // Toggle off if clicking same value again
+            if (responses[index] === val) {
+                responses[index] = null;
+            } else {
+                responses[index] = val;
+            }
+            renderSymptomsList();
+        }
+
+        // Set all responses at once
+        function setAllResponses(val) {
+            symptoms.forEach((_, i) => responses[i] = val);
+            renderSymptomsList();
+        }
+
+        // Calculate score and update results card
+        function updateCalculations() {
+            let yesCount = 0;
+            let answeredCount = 0;
+
+            symptoms.forEach((_, i) => {
+                if (responses[i] !== null) answeredCount++;
+                if (responses[i] === 'yes') yesCount++;
+            });
+
+            const total = symptoms.length;
+            const percentage = Math.round((yesCount / total) * 100);
+            const isInterventionNeeded = yesCount >= 13; // 60% threshold (13+ out of 22)
+
+            // Update UI Counters
+            document.getElementById('completionTracker').textContent = `Answered ${answeredCount} / ${total}`;
+            document.getElementById('yesScoreDisplay').textContent = yesCount;
+            document.getElementById('scoreBadge').textContent = `${percentage}% Yes Ticks`;
+            
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = `${percentage}%`;
+
+            const interventionBadge = document.getElementById('interventionBadge');
+            const statusText = document.getElementById('statusText');
+            const statusIcon = document.getElementById('statusIcon');
+            const recommendationDescription = document.getElementById('recommendationDescription');
+
+            if (isInterventionNeeded) {
+                // High score warning state
+                interventionBadge.className = "inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl font-extrabold text-lg sm:text-xl transition-all bg-brand-orange text-white shadow-lg shadow-brand-orange/30 font-heading animate-pulse";
+                statusText.textContent = "Remedial Intervention Needed: YES";
+                statusIcon.setAttribute('data-lucide', 'alert-triangle');
+                
+                progressBar.className = "bg-brand-orange h-full rounded-full transition-all duration-500";
+
+                recommendationDescription.innerHTML = `
+                    <span class="font-bold text-white">Threshold Met (60% or higher):</span> The child exhibits <strong>${yesCount} out of 22 (${percentage}%)</strong> observed difficulties. Early remedial intervention and individualized learning strategy support is recommended.
+                `;
+            } else {
+                // Normal state
+                interventionBadge.className = "inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl font-extrabold text-lg sm:text-xl transition-all bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-heading";
+                statusText.textContent = "Remedial Intervention Needed: NO";
+                statusIcon.setAttribute('data-lucide', 'check-circle-2');
+
+                progressBar.className = "bg-brand-blue h-full rounded-full transition-all duration-500";
+
+                recommendationDescription.innerHTML = `
+                    Currently <strong>${yesCount} out of 22 (${percentage}%)</strong> difficulties are marked as YES. Count is below the 60% threshold (13 or more YES ticks). Continue supporting the student's learning in standard classroom settings.
+                `;
+            }
+
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        // Reset all fields
+        function resetAllSelections() {
+            symptoms.forEach((_, i) => responses[i] = null);
+            document.getElementById('screeningDetailsForm').reset();
+            
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('screeningDate').value = today;
+
+            renderSymptomsList();
+        }
+
+        // Initializer
+        window.addEventListener('DOMContentLoaded', () => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('screeningDate').value = today;
+            document.getElementById('yearSpan').textContent = new Date().getFullYear();
+
+            renderSymptomsList();
+        });
+    </script>
+</body>
+</html>
