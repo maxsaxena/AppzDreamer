@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brilliantly Dyslexic — A More Inclusive Future</title>
+<meta name="description" content="Brilliantly Dyslexic — building a more informed and inclusive world where dyslexia is understood, supported and given the opportunity to thrive.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+  :root{
+    --blue:#123c92;
+    --blue-2:#0d63ed;
+    --ink:#153b80;
+    --muted:#667a9c;
+    --lav:#f0efff;
+    --mint:#eefaf7;
+    --orange:#ff8a1f;
+    --teal:#177d80;
+    --white:#fff;
+    --line:#dfe7f5;
+    --shadow:0 10px 35px rgba(23,58,115,.08);
+    --radius:22px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    color:var(--ink);
+    background:#fff;
+    font-family:"DM Sans",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{text-decoration:none;color:inherit}
+  img{max-width:100%;display:block}
+  .container{width:min(1180px,calc(100% - 72px));margin:auto}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(30,65,120,.06);
+  }
+  nav{
+    height:76px;display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{
+    font-family:Georgia,"Times New Roman",serif;
+    font-weight:700;font-size:17px;line-height:.88;
+    color:#173b82;position:relative;display:inline-block;
+  }
+  .brand span{display:block}
+  .brand i{
+    position:absolute;width:25px;height:2px;background:var(--orange);
+    right:-23px;top:8px;transform:rotate(-35deg);border-radius:3px;
+  }
+  .brand i:after{
+    content:"";position:absolute;width:18px;height:2px;background:var(--orange);
+    top:8px;right:-2px;transform:rotate(55deg);
+  }
+  .navlinks{display:flex;gap:34px;align-items:center;margin-left:auto;margin-right:36px}
+  .navlinks a{font-size:12px;color:#6c7d9c;position:relative}
+  .navlinks a.active:after{
+    content:"";position:absolute;left:0;right:0;margin:auto;bottom:-12px;
+    width:25px;height:2px;background:var(--blue-2);
+  }
+  .nav-actions{display:flex;align-items:center;gap:18px}
+  .search{font-size:21px;color:var(--blue-2)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:12px;
+    border-radius:999px;padding:12px 22px;font-size:12px;font-weight:600;
+    background:var(--blue-2);color:#fff;box-shadow:0 7px 18px rgba(13,99,237,.18);
+    border:1px solid transparent;transition:.2s ease;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn.outline{background:transparent;color:var(--blue-2);border-color:#77a9f7;box-shadow:none}
+  .arrow{font-size:16px;line-height:0}
+
+  /* GENERAL */
+  section{position:relative;overflow:hidden}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:2px;font-size:10px;font-weight:700;
+    color:#7c8fae;margin-bottom:13px;
+  }
+  h1,h2,h3{
+    font-family:"Playfair Display",Georgia,serif;
+    margin:0;color:var(--blue);
+    letter-spacing:-1.4px;
+  }
+  h1{font-size:58px;line-height:.99}
+  h2{font-size:43px;line-height:1.04}
+  p{font-size:13px;line-height:1.55;color:#667b9e;margin:16px 0}
+  .copy{max-width:390px}
+
+  /* ABSTRACT ART */
+  .art{
+    position:relative;height:390px;min-width:0;
+  }
+  .art .sun{
+    position:absolute;width:100px;height:100px;border-radius:50%;
+    background:linear-gradient(145deg,#ffb63b,#ff8a1f);
+    right:22%;top:8%;opacity:.94;
+  }
+  .art .blob{
+    position:absolute;border-radius:48% 52% 45% 55%;
+    background:#eaf1ff;filter:saturate(.9);
+  }
+  .art .blob.one{width:280px;height:240px;right:2%;top:14%;transform:rotate(12deg)}
+  .art .blob.two{width:170px;height:150px;right:30%;top:30%;background:#d9d4ff;transform:rotate(-20deg)}
+  .art .leaf{
+    position:absolute;width:30px;height:90px;border-radius:100% 0 100% 0;
+    background:#176b70;transform-origin:bottom center;
+  }
+  .art .leaf.l1{right:9%;bottom:35px;transform:rotate(35deg)}
+  .art .leaf.l2{right:17%;bottom:25px;transform:rotate(-18deg);height:115px;background:#2b8e83}
+  .art .leaf.l3{right:27%;bottom:25px;transform:rotate(-48deg);height:82px;background:#73aaa5}
+  .art .person{
+    position:absolute;right:28%;bottom:35px;width:180px;height:205px;
+    background:#fff0e1;border-radius:52% 48% 0 0;
+    clip-path:polygon(35% 0,65% 0,88% 32%,100% 100%,0 100%,12% 32%);
+  }
+  .art .hair{
+    position:absolute;right:33%;bottom:178px;width:105px;height:88px;
+    background:#083d8c;border-radius:65% 45% 35% 40%;transform:rotate(-8deg)
+  }
+  .art .paper{
+    position:absolute;right:34%;top:3%;width:95px;height:48px;
+    border-top:3px solid var(--blue);transform:rotate(-25deg);
+  }
+  .art .paper:before,.art .paper:after{
+    content:"";position:absolute;background:var(--blue);height:2px;transform-origin:left;
+  }
+  .art .paper:before{width:70px;top:2px;left:8px;transform:rotate(26deg)}
+  .art .paper:after{width:35px;top:2px;left:50px;transform:rotate(-44deg)}
+  .art .scribble{
+    position:absolute;border:2px solid var(--orange);border-radius:50%;
+    width:130px;height:55px;right:42%;top:30%;transform:rotate(-25deg)
+  }
+  .art .stairs{
+    position:absolute;right:0;bottom:0;width:245px;height:150px;
+    background:repeating-linear-gradient(135deg,#e5e1da 0 24px,#c8c3ba 25px 27px);
+    clip-path:polygon(28% 0,100% 0,100% 100%,0 100%);
+    opacity:.9;
+  }
+
+  /* HERO */
+  .hero{padding:30px 0 34px;background:#fff}
+  .hero-grid{display:grid;grid-template-columns:43% 57%;align-items:center;min-height:470px}
+  .hero h1{max-width:470px}
+  .hero .copy{max-width:410px}
+  .hero-art{height:410px}
+  .hero-art .person{right:35%}
+  .hero-art .hair{right:40%}
+  .hero-art .sun{right:23%}
+  .hero-art .blob.one{right:-4%}
+  .hero-art .paper{right:41%}
+  .hero-art .scribble{right:47%}
+  .hero-art .stairs{right:-4%;width:270px}
+
+  /* EXIST */
+  .exists{padding:58px 0;background:#fff;border-top:1px solid #f0f3f9}
+  .exists-grid{display:grid;grid-template-columns:43% 57%;align-items:center}
+  .exists-art .blob.one{right:5%;top:5%;width:330px;height:280px}
+  .exists-art .stairs{width:300px;height:185px;right:0}
+  .door{
+    position:absolute;right:25%;bottom:40px;width:125px;height:200px;
+    background:linear-gradient(#80bdfd 0 54%,#e9f0f8 55%);
+    border:12px solid #d9e4ed;border-bottom-width:22px;
+    box-shadow:0 12px 25px rgba(20,60,120,.08);
+  }
+  .door:after{content:"";position:absolute;width:14px;height:14px;border-radius:50%;background:var(--orange);left:14px;bottom:70px}
+
+  /* JOURNEY */
+  .journey{background:#effaf8;padding:52px 0 46px}
+  .journey-top{display:grid;grid-template-columns:43% 57%;align-items:center}
+  .journey-art .sun{right:26%;top:0}
+  .journey-art .path{
+    position:absolute;width:260px;height:340px;right:25%;top:18px;
+    border:22px solid #fff;border-left-color:transparent;border-bottom-color:transparent;
+    border-radius:50%;transform:rotate(23deg);opacity:.95
+  }
+  .signs{position:absolute;right:3%;top:70px}
+  .signs div{padding:7px 18px;background:#1260e9;color:white;font-weight:700;font-size:12px;margin:8px 0;clip-path:polygon(0 0,100% 0,88% 50%,100% 100%,0 100%,12% 50%)}
+  .signs div:nth-child(2){background:var(--orange);margin-left:30px}
+  .journey-steps{
+    margin-top:30px;display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+    position:relative;
+  }
+  .journey-steps:before{
+    content:"";position:absolute;left:7%;right:7%;top:38px;border-top:1px dashed #aabbd8;
+  }
+  .step{text-align:center;position:relative}
+  .step-icon{
+    width:70px;height:70px;margin:0 auto 12px;border-radius:50%;
+    background:#e5ebff;display:grid;place-items:center;font-size:29px;
+    border:7px solid #f3f7ff;position:relative;z-index:2;
+  }
+  .step:nth-child(2) .step-icon{background:#dff4ef}
+  .step:nth-child(3) .step-icon{background:#fff3dc}
+  .step:nth-child(4) .step-icon{background:#e7edff}
+  .step h3{font-family:"DM Sans";font-size:14px;letter-spacing:0}
+  .step p{font-size:11px;margin:6px auto 0;max-width:190px}
+
+  /* ROLES */
+  .roles{padding:55px 0 62px}
+  .roles-head{display:grid;grid-template-columns:47% 53%;align-items:end;margin-bottom:25px}
+  .roles-head p{max-width:390px;margin-left:auto}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .card{
+    background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e9eef7;
+    box-shadow:var(--shadow);min-height:285px;transition:.2s;
+  }
+  .card:hover{transform:translateY(-4px)}
+  .card-art{height:116px;background:linear-gradient(135deg,#edf3ff,#d9e7ff);position:relative;overflow:hidden}
+  .card-art:before{content:"";position:absolute;width:110px;height:110px;background:#c7d6ff;border-radius:50%;left:20px;top:25px;opacity:.8}
+  .card-art:after{content:"";position:absolute;width:90px;height:125px;background:#ffecd9;border-radius:60% 60% 0 0;right:38px;bottom:-20px}
+  .card:nth-child(2) .card-art{background:linear-gradient(135deg,#eaf9f7,#dbeff0)}
+  .card:nth-child(3) .card-art{background:linear-gradient(135deg,#eef1ff,#dff1f2)}
+  .card:nth-child(4) .card-art{background:linear-gradient(135deg,#eaf1ff,#dce8f9)}
+  .card-body{padding:18px 18px 16px}
+  .card h3{font-family:"Playfair Display";font-size:19px;line-height:1.05}
+  .card p{font-size:11px;line-height:1.45;margin:10px 0 15px}
+  .circle-arrow{
+    width:31px;height:31px;border-radius:50%;background:#e9edff;
+    display:grid;place-items:center;color:var(--blue-2);font-weight:700;
+  }
+
+  /* BELIEFS */
+  .beliefs{background:#f2f1ff;padding:52px 0 55px}
+  .belief-head{display:grid;grid-template-columns:42% 58%;align-items:end;margin-bottom:35px}
+  .belief-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .belief{
+    padding:0 28px;border-right:1px solid #d9d8eb;min-height:170px
+  }
+  .belief:first-child{padding-left:0}
+  .belief:last-child{border-right:0}
+  .belief-icon{font-size:29px;height:48px}
+  .belief h3{font-family:"Playfair Display";font-size:18px;line-height:1.05}
+  .belief p{font-size:11px;max-width:205px;margin-top:8px}
+
+  /* VISION */
+  .vision{padding:52px 0 56px;background:#fff}
+  .vision-grid{display:grid;grid-template-columns:57% 43%;align-items:center;min-height:300px}
+  .landscape{
+    height:320px;position:relative;overflow:hidden;border-radius:18px 0 0 18px;
+    background:linear-gradient(#eaf3ff 0 45%,#d9eaf0 46% 100%);
+  }
+  .mountain{
+    position:absolute;bottom:0;width:70%;height:210px;
+    background:#2d7775;clip-path:polygon(0 100%,28% 25%,45% 55%,62% 10%,100% 100%);
+    opacity:.95;
+  }
+  .mountain.m2{left:32%;background:#91b8b4;opacity:.9}
+  .road{
+    position:absolute;left:32%;bottom:-25px;width:190px;height:370px;
+    background:#fff1df;transform:rotate(22deg);border-radius:50%;
+  }
+  .city{
+    position:absolute;bottom:115px;left:35%;width:190px;height:55px;
+    background:repeating-linear-gradient(90deg,#24588c 0 10px,transparent 10px 20px);
+    opacity:.8
+  }
+  .direction-signs{position:absolute;left:8%;top:80px;z-index:3}
+  .direction-signs span{
+    display:block;background:#236f78;color:#fff;font-weight:700;font-size:11px;
+    padding:7px 16px;margin:5px 0;clip-path:polygon(0 0,100% 0,91% 50%,100% 100%,0 100%,8% 50%);
+  }
+  .direction-signs span:nth-child(2){background:#fff;color:#1e477f}
+  .direction-signs span:nth-child(3){background:#fff;color:#1e477f}
+  .direction-signs span:nth-child(4){background:#fff;color:#1e477f}
+  .vision-copy{padding-left:42px}
+  .vision-copy h2{font-size:39px}
+  .vision-copy p{max-width:390px}
+
+  footer{padding:24px 0;text-align:center;font-size:11px;color:#8190a8;border-top:1px solid #edf0f6}
+
+  /* MOBILE */
+  @media(max-width:900px){
+    .container{width:min(100% - 36px,650px)}
+    .navlinks{display:none}
+    .nav-actions .search{display:none}
+    nav{height:68px}
+    h1{font-size:45px}
+    h2{font-size:35px}
+    .hero-grid,.exists-grid,.journey-top,.vision-grid,.roles-head,.belief-head{
+      grid-template-columns:1fr;
+    }
+    .hero-grid,.exists-grid,.journey-top{gap:10px}
+    .copy{max-width:100%}
+    .hero-art,.exists-art,.journey-art{height:310px}
+    .hero-art{order:-1}
+    .roles-head p,.belief-head p{margin-left:0}
+    .cards{grid-template-columns:1fr 1fr}
+    .belief-grid{grid-template-columns:1fr 1fr;gap:22px}
+    .belief{border-right:0;border-bottom:1px solid #d9d8eb;padding:15px 10px 20px 0}
+    .belief:nth-child(2){padding-left:15px}
+    .journey-steps{grid-template-columns:1fr 1fr}
+    .journey-steps:before{display:none}
+    .landscape{border-radius:18px}
+    .vision-copy{padding:35px 0 0}
+  }
+  @media(max-width:560px){
+    .container{width:calc(100% - 28px)}
+    .brand{font-size:15px}
+    .btn{padding:10px 16px}
+    h1{font-size:39px}
+    h2{font-size:31px}
+    .cards{grid-template-columns:1fr}
+    .belief-grid{grid-template-columns:1fr}
+    .belief:nth-child(2){padding-left:0}
+    .journey-steps{grid-template-columns:1fr}
+    .art{transform:scale(.92);transform-origin:center}
+    .vision-copy h2{font-size:33px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a href="#" class="brand"><span>Brilliantly</span><span>Dyslexic</span><i></i></a>
+      <div class="navlinks">
+        <a class="active" href="#about">Who we are</a>
+        <a href="#journey">What is Dyslexia</a>
+        <a href="#roles">Support</a>
+        <a href="#beliefs">Resources</a>
+      </div>
+      <div class="nav-actions">
+        <a class="search" href="#" aria-label="Search">⌕</a>
+        <a class="btn" href="#contact">Get in touch <span class="arrow">→</span></a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ABOUT -->
+  <section class="hero" id="about">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">About us</div>
+        <h1>Different minds<br>deserve to be<br>understood.</h1>
+        <p class="copy">Brilliantly Dyslexic exists to build a more informed and inclusive world where people with dyslexia are understood, supported and given the opportunity to thrive.</p>
+        <a class="btn" href="#exists">Our story <span class="arrow">→</span></a>
+      </div>
+      <div class="art hero-art">
+        <div class="blob one"></div><div class="blob two"></div>
+        <div class="sun"></div><div class="paper"></div><div class="scribble"></div>
+        <div class="person"></div><div class="hair"></div>
+        <div class="leaf l1"></div><div class="leaf l2"></div><div class="leaf l3"></div>
+        <div class="stairs"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY WE EXIST -->
+  <section class="exists" id="exists">
+    <div class="container exists-grid">
+      <div>
+        <div class="eyebrow">Why we exist</div>
+        <h2>A more inclusive<br>world for<br>dyslexic minds.</h2>
+        <p class="copy">Too often, the conversation around dyslexia focuses on what is difficult — reading, writing, spelling or keeping up — rather than the person behind those challenges.</p>
+        <p class="copy">We are here to change that. Brilliantly Dyslexic raises awareness, provides trusted information and connects people to support, resources and opportunities.</p>
+        <a class="btn outline" href="#beliefs">Our mission <span class="arrow">→</span></a>
+      </div>
+      <div class="art exists-art">
+        <div class="blob one"></div><div class="blob two"></div><div class="sun" style="right:43%;top:25%;width:50px;height:50px"></div>
+        <div class="door"></div><div class="stairs"></div>
+        <div class="leaf l1"></div><div class="leaf l2"></div><div class="leaf l3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNEY -->
+  <section class="journey" id="journey">
+    <div class="container">
+      <div class="journey-top">
+        <div>
+          <div class="eyebrow">From understanding to possibility</div>
+          <h2>A journey that<br>opens up futures.</h2>
+          <p class="copy">Dyslexia is more than a diagnosis. Our work follows the journey from understanding and identification to support, strengths and opportunity.</p>
+        </div>
+        <div class="art journey-art">
+          <div class="sun"></div><div class="blob one"></div>
+          <div class="path"></div>
+          <div class="signs"><div>DISCOVER</div><div>EXPLORE</div></div>
+          <div class="leaf l1"></div><div class="leaf l2"></div><div class="leaf l3"></div>
+        </div>
+      </div>
+
+      <div class="journey-steps">
+        <div class="step">
+          <div class="step-icon">▣</div>
+          <h3>Understand</h3>
+          <p>Make dyslexia easier to understand through accessible information and real experiences.</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">♧</div>
+          <h3>Support</h3>
+          <p>Help families, educators and individuals find practical guidance, resources and pathways to support.</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">❧</div>
+          <h3>Discover</h3>
+          <p>Recognise different strengths, interests and ways of learning.</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">➤</div>
+          <h3>Explore</h3>
+          <p>Open up possibilities across education, skills, careers and beyond.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLES -->
+  <section class="roles" id="roles">
+    <div class="container">
+      <div class="roles-head">
+        <div>
+          <div class="eyebrow">A platform for everyone around dyslexia</div>
+          <h2>Different roles.<br>A shared goal.</h2>
+        </div>
+        <p>Dyslexia affects and involves many people — children, educators, schools, policymakers and the wider community. We bring them together with trusted information, resources and pathways for support.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card-art"></div>
+          <div class="card-body">
+            <h3>For children</h3>
+            <p>Make dyslexia easier to understand, discover their strengths and explore what they can become.</p>
+            <div class="circle-arrow">→</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-art"></div>
+          <div class="card-body">
+            <h3>For parents<br>& caregivers</h3>
+            <p>Find answers, understand the assessment journey and learn how to support your child.</p>
+            <div class="circle-arrow">→</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-art"></div>
+          <div class="card-body">
+            <h3>For educators<br>& schools</h3>
+            <p>Build greater understanding and create more inclusive learning environments.</p>
+            <div class="circle-arrow" style="background:#fff0dc;color:#d56f00">→</div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-art"></div>
+          <div class="card-body">
+            <h3>For policymakers<br>& the ecosystem</h3>
+            <p>Access awareness, research, initiatives and information to help shape more inclusive systems.</p>
+            <div class="circle-arrow">→</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- BELIEFS -->
+  <section class="beliefs" id="beliefs">
+    <div class="container">
+      <div class="belief-head">
+        <div>
+          <div class="eyebrow">What we believe</div>
+          <h2>Guiding a more<br>inclusive tomorrow.</h2>
+        </div>
+      </div>
+      <div class="belief-grid">
+        <article class="belief">
+          <div class="belief-icon">✦</div>
+          <h3>Different is<br>not less.</h3>
+          <p>A different way of learning does not mean a lesser ability to learn, create or contribute.</p>
+        </article>
+        <article class="belief">
+          <div class="belief-icon">♧</div>
+          <h3>Every person<br>is different.</h3>
+          <p>There is no single dyslexic experience. Each individual has their own challenges, strengths, interests and aspirations.</p>
+        </article>
+        <article class="belief">
+          <div class="belief-icon">❧</div>
+          <h3>Understanding<br>creates opportunity.</h3>
+          <p>When we understand how someone learns, we can create environments where they can participate, develop and thrive.</p>
+        </article>
+        <article class="belief">
+          <div class="belief-icon">♙</div>
+          <h3>The future should be<br>bigger than the diagnosis.</h3>
+          <p>Dyslexia should not define the limits of a person's education, skills, career or future.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION -->
+  <section class="vision" id="contact">
+    <div class="container vision-grid">
+      <div class="landscape">
+        <div class="direction-signs">
+          <span>Education</span>
+          <span>Skills</span>
+          <span>Employment</span>
+          <span>Independence</span>
+        </div>
+        <div class="city"></div>
+        <div class="mountain"></div>
+        <div class="mountain m2"></div>
+        <div class="road"></div>
+      </div>
+      <div class="vision-copy">
+        <div class="eyebrow">Our vision</div>
+        <h2>A world where dyslexia<br>is understood — and<br>every mind has the<br>opportunity to thrive.</h2>
+        <p>Where children are supported early, strengths are recognised, classrooms are more inclusive, and people with dyslexia can see a future filled with possibilities.</p>
+        <a class="btn" href="mailto:hello@brilliantlydyslexic.com">Be part of the change <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  © 2026 Brilliantly Dyslexic · Different by design. Brilliant by nature.
+</footer>
+
+</body>
+</html>
